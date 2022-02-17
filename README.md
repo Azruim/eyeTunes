@@ -1,4 +1,4 @@
-# eye-tunes
+# eyeTunes
 
 [![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 
@@ -27,7 +27,9 @@ Second Noroff Java assignment.
 
 ## Maintainers
 
-[@Azruim](https://github.com/Azruim)
+[@Azruim (Nico Behnen)](https://github.com/Azruim)
+
+[@bgf122 (Sasu Korhonen)](https://github.com/bgf122)
 
 ## Contributing
 
@@ -37,4 +39,4 @@ Small note: If editing the README, please conform to the [standard-readme](https
 
 ## License
 
-MIT © 2022 Nico Behnen
+MIT © 2022 Nico Behnen & Sasu Korhonen
