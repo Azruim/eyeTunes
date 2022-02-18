@@ -1,7 +1,9 @@
 package fi.experis.eyeTunes.dataAccess.models;
 
+
 public class Customer {
-    Integer Id;
+
+    Long Id;
     String firstName;
     String lastName;
     String country;
@@ -9,8 +11,7 @@ public class Customer {
     String phoneNumber;
     String email;
 
-    public Customer(Integer id, String firstName, String lastName, String country, String postalCode, String phoneNumber, String email) {
-        Id = id;
+    public Customer(String firstName, String lastName, String country, String postalCode, String phoneNumber, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.country = country;
@@ -19,11 +20,15 @@ public class Customer {
         this.email = email;
     }
 
-    public Integer getId() {
+    public Customer() {
+        super();
+    }
+
+    public Long getId() {
         return Id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         Id = id;
     }
 
