@@ -1,10 +1,12 @@
 package fi.experis.eyeTunes.dataAccess.controllers;
 
+import fi.experis.eyeTunes.dataAccess.models.CustomerRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class CustomerController {
+    CustomerRepository customerRepository = new CustomerRepository();
 
     @GetMapping("/")
     public String index() {
@@ -13,7 +15,7 @@ public class CustomerController {
 
     @GetMapping("/customers")
     public String customers() {
-        return "this is the customers page";
+        return customerRepository.getCustomerById("1").toString();
     }
 
 

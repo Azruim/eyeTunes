@@ -11,7 +11,8 @@ public class Customer {
     String phoneNumber;
     String email;
 
-    public Customer(String firstName, String lastName, String country, String postalCode, String phoneNumber, String email) {
+    public Customer(Long id, String firstName, String lastName, String country, String postalCode, String phoneNumber, String email) {
+        Id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.country = country;
