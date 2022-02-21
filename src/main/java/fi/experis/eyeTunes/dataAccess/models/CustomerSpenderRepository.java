@@ -41,7 +41,7 @@ public class CustomerSpenderRepository {
                         resultSet.getFloat("Sum")
                 ));
             }
-            System.out.println("Country statistics successfully selected");
+            System.out.println("Spender statistics successfully selected");
         }
         catch (SQLException e) {
             e.printStackTrace();
