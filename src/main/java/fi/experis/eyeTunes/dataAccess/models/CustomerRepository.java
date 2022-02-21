@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 public class CustomerRepository {
-    private String URL = ConnectionHelper.CONNECTION_URL;
+    private final String URL = ConnectionHelper.CONNECTION_URL;
     private Connection conn = null;
 
     public Customer getCustomerById(String Id){
@@ -25,7 +25,6 @@ public class CustomerRepository {
             preparedStatement.setString(1,Id);
             // Execute Query
             ResultSet resultSet = preparedStatement.executeQuery();
-
             while (resultSet.next()) {
                 customer = new Customer(
                         resultSet.getLong("CustomerId"),
@@ -39,15 +38,15 @@ public class CustomerRepository {
             }
             System.out.println("Select specific customer successful");
         }
-        catch (Exception exception){
-            System.out.println(exception);
+        catch (Exception e){
+            e.printStackTrace();
         }
         finally {
             try {
                 conn.close();
             }
-            catch (Exception exception){
-                System.out.println(exception);
+            catch (Exception e){
+                e.printStackTrace();
             }
         }
         return customer;
@@ -80,15 +79,15 @@ public class CustomerRepository {
             }
             System.out.println("Select specific customer successful");
         }
-        catch (Exception exception){
-            System.out.println(exception);
+        catch (Exception e){
+            e.printStackTrace();
         }
         finally {
             try {
                 conn.close();
             }
-            catch (Exception exception){
-                System.out.println(exception);
+            catch (Exception e){
+                e.printStackTrace();
             }
         }
         return customers;

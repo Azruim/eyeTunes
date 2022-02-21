@@ -1,9 +1,12 @@
 package fi.experis.eyeTunes.dataAccess.controllers;
 
+import fi.experis.eyeTunes.dataAccess.models.Customer;
 import fi.experis.eyeTunes.dataAccess.models.CustomerRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.ArrayList;
 
 @RestController
 public class CustomerController {
@@ -15,12 +18,12 @@ public class CustomerController {
     }
 
     @GetMapping("/customers/{customerId}")
-    public String customerById(@PathVariable String customerId) {
-        return customerRepository.getCustomerById(customerId).toString();
+    public Customer customerById(@PathVariable String customerId) {
+        return customerRepository.getCustomerById(customerId);
     }
 
     @GetMapping("/customers")
-    public String allCustomers() {
-        return customerRepository.getAllCustomers().toString();
+    public ArrayList<Customer> allCustomers() {
+        return customerRepository.getAllCustomers();
     }
 }
