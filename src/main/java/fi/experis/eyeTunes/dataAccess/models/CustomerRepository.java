@@ -58,14 +58,94 @@ public class CustomerRepository {
             // Connect to DB
             conn = DriverManager.getConnection(URL);
             System.out.println("Connection to SQLite has been established.");
-
             // Make SQL query
             PreparedStatement preparedStatement =
                     conn.prepareStatement("SELECT CustomerId, FirstName, LastName , Country, PostalCode, Phone, Email FROM customer");
-
             // Execute Query
             ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                customers.add(new Customer(
+                        resultSet.getLong("CustomerId"),
+                        resultSet.getString("FirstName"),
+                        resultSet.getString("LastName"),
+                        resultSet.getString("Country"),
+                        resultSet.getString("PostalCode"),
+                        resultSet.getString("Phone"),
+                        resultSet.getString("Email")
+                ));
+            }
+            System.out.println("Select specific customer successful");
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                conn.close();
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        return customers;
+    }
 
+    public Customer getCustomerByName(String name) {
+        Customer customer = null;
+        try{
+            // Connect to DB
+            conn = DriverManager.getConnection(URL);
+            System.out.println("Connection to SQLite has been established.");
+            // Make SQL query
+            PreparedStatement preparedStatement =
+                    conn.prepareStatement("SELECT CustomerId, FirstName, LastName, Country, PostalCode, Phone, Email FROM Customer WHERE FirstName LIKE ? OR LastName LIKE ?");
+            preparedStatement.setString(1, name);
+            preparedStatement.setString(2, name);
+            // Execute Query
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                customer = new Customer(
+                        resultSet.getLong("CustomerId"),
+                        resultSet.getString("FirstName"),
+                        resultSet.getString("LastName"),
+                        resultSet.getString("Country"),
+                        resultSet.getString("PostalCode"),
+                        resultSet.getString("Phone"),
+                        resultSet.getString("Email")
+                );
+            }
+            System.out.println("Select specific customer successful");
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                conn.close();
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        return customer;
+    }
+
+    public ArrayList<Customer> getNumberOfCustomers(String limit, String offSet) {
+        ArrayList<Customer> customers = new ArrayList<>();
+        if (limit == null) limit = "10";
+        if (offSet == null) offSet = "10";
+
+        try{
+            // Connect to DB
+            conn = DriverManager.getConnection(URL);
+            System.out.println("Connection to SQLite has been established.");
+            // Make SQL query
+            PreparedStatement preparedStatement =
+                    conn.prepareStatement("SELECT CustomerId, FirstName, LastName , Country, PostalCode, Phone, Email FROM Customer LIMIT ? OFFSET ?");
+            preparedStatement.setString(1, limit);
+            preparedStatement.setString(2, offSet);
+            // Execute Query
+            ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 customers.add(new Customer(
                         resultSet.getLong("CustomerId"),
