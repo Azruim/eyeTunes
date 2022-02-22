@@ -2,10 +2,7 @@ package fi.experis.eyeTunes.dataAccess.models;
 
 import fi.experis.eyeTunes.dataAccess.util.ConnectionHelper;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class CustomerRepository {
@@ -36,7 +33,6 @@ public class CustomerRepository {
                         resultSet.getString("Email")
                 );
             }
-            System.out.println("Select specific customer successful");
         }
         catch (Exception e){
             e.printStackTrace();
@@ -171,5 +167,47 @@ public class CustomerRepository {
             }
         }
         return customers;
+    }
+
+    public Customer createNewCustomer(Customer customer) {
+        try {
+            // Connect to DB
+            conn = DriverManager.getConnection(URL);
+            System.out.println("Connection to SQLite has been established.");
+
+            // Make SQL query
+            PreparedStatement preparedStatement =
+                    conn.prepareStatement(
+                            "INSERT INTO Customer (FirstName, LastName, Country, PostalCode, Phone, Email) VALUES (?, ?, ?, ?, ?, ?);",
+                            Statement.RETURN_GENERATED_KEYS);
+            preparedStatement.setString(1, customer.firstName);
+            preparedStatement.setString(2, customer.lastName);
+            preparedStatement.setString(3, customer.country);
+            preparedStatement.setString(4, customer.postalCode);
+            preparedStatement.setString(5, customer.phoneNumber);
+            preparedStatement.setString(6, customer.email);
+
+            // Execute Query
+            preparedStatement.executeUpdate();
+            ResultSet resultSet = preparedStatement.getGeneratedKeys();
+
+            while (resultSet.next()) {
+                customer.setId(resultSet.getLong(1));
+            }
+
+            System.out.println("New customer successfully created");
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                conn.close();
+            }
+            catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return customer;
     }
 }
