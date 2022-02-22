@@ -2,11 +2,9 @@ package fi.experis.eyeTunes.dataAccess.controllers;
 
 import fi.experis.eyeTunes.dataAccess.models.Customer;
 import fi.experis.eyeTunes.dataAccess.models.CustomerRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 @RestController

@@ -2,10 +2,7 @@ package fi.experis.eyeTunes.dataAccess.models;
 
 import fi.experis.eyeTunes.dataAccess.util.ConnectionHelper;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class CustomerRepository {
@@ -216,21 +213,21 @@ public class CustomerRepository {
     }
 
     public Customer updateCustomer(Customer customer) {
-        Customer updateCustomer = null;
         String valuesToUpdate = "";
 
+        //TODO: HANDLE FIRSTNAME NOT INSERTED
         if (customer.firstName != null) {
-            valuesToUpdate += "FirstName = ? ";
-        } else if (customer.lastName != null) {
-            valuesToUpdate += "LastName = ? ";
-        } else if (customer.country != null) {
-            valuesToUpdate += "Country = ? ";
-        } else if (customer.postalCode != null) {
-            valuesToUpdate += "PostalCode = ? ";
-        } else if (customer.phoneNumber != null) {
-            valuesToUpdate += "PhoneNumber = ? ";
-        } else if (customer.email != null) {
-            valuesToUpdate += "Email = ? ";
+            valuesToUpdate += "FirstName = "+ "'"+ customer.firstName + "'";
+        } if (customer.lastName != null) {
+            valuesToUpdate += ", LastName = "+ "'"+ customer.lastName + "'";
+        } if (customer.country != null) {
+            valuesToUpdate += ", Country = "+ "'"+ customer.country + "'";
+        } if (customer.postalCode != null) {
+            valuesToUpdate += ", PostalCode = "+ "'"+ customer.postalCode + "'";
+        } if (customer.phoneNumber != null) {
+            valuesToUpdate += ", Phone = "+  "'"+ customer.phoneNumber + "'";
+        } if (customer.email != null) {
+            valuesToUpdate += ", Email = "+ "'"+ customer.email + "'";
         }
         try{
             // Connect to DB
@@ -238,37 +235,20 @@ public class CustomerRepository {
             System.out.println("Connection to SQLite has been established.");
             // Make SQL query
             PreparedStatement preparedStatement =
-                    conn.prepareStatement("UPDATE Customer SET \n"
+                    conn.prepareStatement("UPDATE Customer SET "
                             + valuesToUpdate +
-                            "OUTPUT Customer.CustomerId Customer.FirstName, \n" +
-                            "Customer.LastName, Customer.Country, Customer.PostalCode, \n" +
-                            "Customer.Phone, Customer.Email WHERE CustomerId = "+ customer.Id);
-            // Execute Query
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                updateCustomer = new Customer(
-                        resultSet.getLong("CustomerId"),
-                        resultSet.getString("FirstName"),
-                        resultSet.getString("LastName"),
-                        resultSet.getString("Country"),
-                        resultSet.getString("PostalCode"),
-                        resultSet.getString("Phone"),
-                        resultSet.getString("Email")
-                );
-            }
-            System.out.println("Select specific customer successful");
-        }
-        catch (Exception e){
+                            " WHERE CustomerId = " + customer.Id);
+            // Execute Update
+            preparedStatement.executeUpdate();
+        } catch (Exception e){
             e.printStackTrace();
-        }
-        finally {
+        } finally {
             try {
                 conn.close();
-            }
-            catch (Exception e){
+            } catch (Exception e){
                 e.printStackTrace();
             }
         }
-        return updateCustomer;
+        return getCustomerById(customer.Id.toString());
     }
 }
