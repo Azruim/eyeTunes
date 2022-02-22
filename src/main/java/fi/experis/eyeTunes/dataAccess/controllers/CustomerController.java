@@ -2,7 +2,10 @@ package fi.experis.eyeTunes.dataAccess.controllers;
 
 import fi.experis.eyeTunes.dataAccess.models.Customer;
 import fi.experis.eyeTunes.dataAccess.models.CustomerRepository;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 
@@ -29,6 +32,13 @@ public class CustomerController {
     public ArrayList<Customer> getCustomersByLimitAndOffset(@RequestParam(value = "limit", required = false) String limit,
                                                             @RequestParam(value = "offset",required = false) String offSet) {
         return customerRepository.getNumberOfCustomers(limit, offSet);
+    }
+
+    @RequestMapping(
+            value = "/api/customers/update/",
+            method = RequestMethod.PATCH)
+    public Customer updateCustomer(@RequestBody Customer customer) {
+        return customerRepository.updateCustomer(customer);
     }
 
     @PostMapping("/api/customers/")
