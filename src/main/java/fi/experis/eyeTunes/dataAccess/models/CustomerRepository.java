@@ -213,22 +213,23 @@ public class CustomerRepository {
     }
 
     public Customer updateCustomer(Customer customer) {
-        String valuesToUpdate = "";
+        ArrayList<String> valueArray = new ArrayList<>();
 
-        //TODO: HANDLE FIRSTNAME NOT INSERTED
         if (customer.firstName != null) {
-            valuesToUpdate += "FirstName = "+ "'"+ customer.firstName + "'";
+            valueArray.add("FirstName = '" + customer.firstName + "'");
         } if (customer.lastName != null) {
-            valuesToUpdate += ", LastName = "+ "'"+ customer.lastName + "'";
+            valueArray.add("LastName = '"+ customer.lastName + "'");
         } if (customer.country != null) {
-            valuesToUpdate += ", Country = "+ "'"+ customer.country + "'";
+            valueArray.add("Country = '"+ customer.country + "'");
         } if (customer.postalCode != null) {
-            valuesToUpdate += ", PostalCode = "+ "'"+ customer.postalCode + "'";
+            valueArray.add("PostalCode = '"+ customer.postalCode + "'");
         } if (customer.phoneNumber != null) {
-            valuesToUpdate += ", Phone = "+  "'"+ customer.phoneNumber + "'";
+            valueArray.add("Phone = '"+ customer.phoneNumber + "'");
         } if (customer.email != null) {
-            valuesToUpdate += ", Email = "+ "'"+ customer.email + "'";
+            valueArray.add("Email = '"+ customer.email + "'");
         }
+        String valuesToUpdate = String.join(", ", valueArray);
+
         try{
             // Connect to DB
             conn = DriverManager.getConnection(URL);
