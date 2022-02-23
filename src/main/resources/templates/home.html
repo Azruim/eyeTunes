@@ -12,10 +12,16 @@
     5 RANDOM ARTISTS HERE
 </table>
 <table>
-    5 RANDOM SONGS HERE
+    <tr th:each="song: ${songs}">
+        <td th:text="${song.getSongTitle()}">
+        </td>
+    </tr>
 </table>
 <table>
-    AND 5 RANDOM GENRES HERE
+    <tr th:each="genre: ${genres}">
+        <td th:text="${genre.getGenre()}">
+        </td>
+    </tr>
 </table>
 </body>
 </html>
