@@ -1,9 +1,13 @@
 package fi.experis.eyeTunes.dataAccess.models;
 
 public class Genre {
-    String name;
+    private String genre;
 
-    public Genre(String name) {
-        this.name = name;
+    public Genre(String genre) {
+        this.genre = genre;
+    }
+
+    public String getGenre() {
+        return genre;
     }
 }
