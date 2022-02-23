@@ -9,7 +9,9 @@
 </head>
 <body>
 <table>
-    5 RANDOM ARTISTS HERE
+    <tr th:each="artist : ${artists}">
+        <td th:text="${artist.getName()}"></td>
+    </tr>
 </table>
 <table>
     5 RANDOM SONGS HERE
