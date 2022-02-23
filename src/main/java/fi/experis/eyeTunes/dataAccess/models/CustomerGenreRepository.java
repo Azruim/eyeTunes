@@ -19,19 +19,34 @@ public class CustomerGenreRepository {
             // Make SQL query
             PreparedStatement preparedStatement =
                     conn.prepareStatement(
-                            "SELECT HighestGenre, max(Count) AS Max\n" +
+                            "SELECT HighestGenre, Count\n" +
                                     "FROM (\n" +
-                                    "SELECT G.Name AS HighestGenre, count(G.Name) AS Count\n" +
-                                    "FROM Customer C\n" +
-                                    "JOIN Invoice I on C.CustomerId = I.CustomerId\n" +
-                                    "JOIN InvoiceLine IL on i.InvoiceId = IL.InvoiceId\n" +
-                                    "JOIN Track T on IL.TrackId = T.TrackId\n" +
-                                    "JOIN Genre G on T.GenreId = G.GenreId\n" +
-                                    "WHERE C.CustomerId = ?\n" +
-                                    "GROUP BY G.Name\n" +
-                                    "ORDER BY Count DESC);");
+                                    "         SELECT G.Name AS HighestGenre, count(G.Name) AS Count\n" +
+                                    "         FROM Customer C\n" +
+                                    "                  JOIN Invoice I on C.CustomerId = I.CustomerId\n" +
+                                    "                  JOIN InvoiceLine IL on i.InvoiceId = IL.InvoiceId\n" +
+                                    "                  JOIN Track T on IL.TrackId = T.TrackId\n" +
+                                    "                  JOIN Genre G on T.GenreId = G.GenreId\n" +
+                                    "         WHERE C.CustomerId = ?\n" +
+                                    "         GROUP BY G.Name\n" +
+                                    "         ORDER BY Count DESC\n" +
+                                    "     )\n" +
+                                    "WHERE Count = (\n" +
+                                    "    SELECT max(Count)\n" +
+                                    "    FROM (\n" +
+                                    "             SELECT count(G.Name) AS Count\n" +
+                                    "             FROM Customer C\n" +
+                                    "                      JOIN Invoice I on C.CustomerId = I.CustomerId\n" +
+                                    "                      JOIN InvoiceLine IL on i.InvoiceId = IL.InvoiceId\n" +
+                                    "                      JOIN Track T on IL.TrackId = T.TrackId\n" +
+                                    "                      JOIN Genre G on T.GenreId = G.GenreId\n" +
+                                    "             WHERE C.CustomerId = ?\n" +
+                                    "             GROUP BY G.Name\n" +
+                                    "         )\n" +
+                                    ");");
 
             preparedStatement.setString(1, customerId);
+            preparedStatement.setString(2, customerId);
 
             // Execute Query
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -39,7 +54,7 @@ public class CustomerGenreRepository {
             while (resultSet.next()) {
                 customerGenres.add(new CustomerGenre(
                         resultSet.getString("HighestGenre"),
-                        resultSet.getInt("Max")
+                        resultSet.getInt("Count")
                 ));
             }
             System.out.println("Top genres successfully selected");
