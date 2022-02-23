@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 
 @RestController
-public class CustomerGenreController {
+public class CustomerGenreAPIController {
     CustomerGenreRepository customerGenreRepository = new CustomerGenreRepository();
 
     @GetMapping("/api/customers/{customerId}/popular/genre")

@@ -4,11 +4,10 @@ import fi.experis.eyeTunes.dataAccess.models.Customer;
 import fi.experis.eyeTunes.dataAccess.models.CustomerRepository;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 @RestController
-public class CustomerController {
+public class CustomerAPIController {
     CustomerRepository customerRepository = new CustomerRepository();
 
     @GetMapping("/api/customers/name/{name}")

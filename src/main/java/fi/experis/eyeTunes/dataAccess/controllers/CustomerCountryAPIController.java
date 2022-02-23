@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 
 @RestController
-public class CustomerCountryController {
+public class CustomerCountryAPIController {
     CustomerCountryRepository customerCountryRepository = new CustomerCountryRepository();
 
     @GetMapping("/api/statistics/countries/customers/count")

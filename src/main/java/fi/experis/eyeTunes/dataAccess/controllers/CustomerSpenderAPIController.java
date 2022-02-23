@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 
 @RestController
-public class CustomerSpenderController {
+public class CustomerSpenderAPIController {
     CustomerSpenderRepository customerSpenderRepository = new CustomerSpenderRepository();
 
     @GetMapping("/api/statistics/customers/top-spenders")
