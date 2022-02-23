@@ -12,13 +12,13 @@ import java.util.Collections;
 import java.util.List;
 
 public class ArtistRepository {
-    private final String URL = ConnectionHelper.CONNECTION_URL;
     private Connection conn = null;
 
-    public List<Artist> getAllArtists() {
+    public List<Artist> getRandomArtists(int amount) {
         List<Artist> artists = new ArrayList<>();
         try{
             // Connect to DB
+            String URL = ConnectionHelper.CONNECTION_URL;
             conn = DriverManager.getConnection(URL);
             System.out.println("Connection to SQLite has been established.");
             // Make SQL query
@@ -45,6 +45,6 @@ public class ArtistRepository {
             }
         }
         Collections.shuffle(artists);
-        return artists.subList(0, 5);
+        return artists.subList(0, amount);
     }
 }

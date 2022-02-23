@@ -16,7 +16,7 @@ public class CustomerController {
 
     @RequestMapping("/")
     public String home(Model model) {
-        List<Artist> artists = aRep.getAllArtists();
+        List<Artist> artists = aRep.getRandomArtists(5);
         List<Genre> genres = gRep.getRandomGenres(5);
         List<Song> songs = sRep.getRandomSongs(5);
         List<SearchItem> searchResults = srcRep.searchSongsByString("never");
