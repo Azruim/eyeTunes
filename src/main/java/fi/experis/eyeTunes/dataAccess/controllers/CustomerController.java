@@ -9,20 +9,23 @@ import java.util.List;
 
 @Controller
 public class CustomerController {
-    CustomerRepository cRep = new CustomerRepository();
     ArtistRepository aRep = new ArtistRepository();
     GenreRepository gRep = new GenreRepository();
     SongRepository sRep = new SongRepository();
+    SearchRepository srcRep = new SearchRepository();
 
     @RequestMapping("/")
     public String home(Model model) {
         List<Artist> artists = aRep.getAllArtists();
         List<Genre> genres = gRep.getRandomGenres(5);
         List<Song> songs = sRep.getRandomSongs(5);
+        List<SearchItem> searchResults = srcRep.searchSongsByString("never");
+        for (SearchItem item :searchResults) {
+            System.out.println(item.getSong());
+        }
         model.addAttribute("artists" , artists);
         model.addAttribute("genres" , genres);
         model.addAttribute("songs" , songs);
         return "home";
     }
-
 }
