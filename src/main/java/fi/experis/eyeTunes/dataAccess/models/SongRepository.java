@@ -11,9 +11,8 @@ public class SongRepository {
     private final String URL = ConnectionHelper.CONNECTION_URL;
     private Connection conn = null;
 
-    public List<Song> songs = new ArrayList<>();
-
     public List<Song> getRandomSongs(int amount) {
+        List<Song> songs = new ArrayList<>();
         try {
             // Connect to DB
             conn = DriverManager.getConnection(URL);

@@ -4,10 +4,7 @@ import fi.experis.eyeTunes.dataAccess.models.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,21 +17,21 @@ public class CustomerController {
 
     @RequestMapping("/")
     public String home(Model model) {
-        String searchString = "";
-        model.addAttribute("searchString", searchString);
         List<Artist> artists = aRep.getRandomArtists(5);
         List<Genre> genres = gRep.getRandomGenres(5);
         List<Song> songs = sRep.getRandomSongs(5);
         model.addAttribute("artists" , artists);
         model.addAttribute("genres" , genres);
         model.addAttribute("songs" , songs);
+        model.addAttribute("searchString", "");
         return "home";
     }
 
-    @PostMapping("/")
-    public String results(@ModelAttribute String searchString) {
+    @PostMapping("/results")
+    public String results(@RequestParam String searchString, Model model) {
         List<SearchItem> searchItems = srcRep.searchSongsByString(searchString);
-        System.out.println(searchItems);
-        return "home";
+        model.addAttribute("songs", searchItems);
+        System.out.println(model.getAttribute("songs"));
+        return "results";
     }
 }

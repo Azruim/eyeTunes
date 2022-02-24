@@ -11,9 +11,8 @@ public class GenreRepository {
     private final String URL = ConnectionHelper.CONNECTION_URL;
     private Connection conn = null;
 
-    public List<Genre> genres = new ArrayList<>();
-
     public List<Genre> getRandomGenres(int amount) {
+        List<Genre> genres = new ArrayList<>();
         try {
             // Connect to DB
             conn = DriverManager.getConnection(URL);

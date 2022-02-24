@@ -8,13 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SearchRepository {
-
     private final String URL = ConnectionHelper.CONNECTION_URL;
     private Connection conn = null;
 
-    public List<SearchItem> searchResults = new ArrayList<>();
-
     public List<SearchItem> searchSongsByString(String searchString) {
+        List<SearchItem> searchResults = new ArrayList<>();
         try {
             // Connect to DB
             conn = DriverManager.getConnection(URL);

@@ -10,7 +10,6 @@ public class SearchItem {
         this.song = song;
         this.artist = artist;
         this.album = album;
-        this.album = album;
         this.genre = genre;
     }
 
