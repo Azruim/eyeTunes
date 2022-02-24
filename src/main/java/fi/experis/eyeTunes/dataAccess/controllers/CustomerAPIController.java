@@ -11,7 +11,7 @@ public class CustomerAPIController {
     CustomerRepository customerRepository = new CustomerRepository();
 
     @GetMapping("/api/customers/name/{name}")
-    public Customer customerByName(@PathVariable String name) {
+    public ArrayList<Customer> customerByName(@PathVariable String name) {
             return customerRepository.getCustomerByName(name);
     }
 
