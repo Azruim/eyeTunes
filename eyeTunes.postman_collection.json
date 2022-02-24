@@ -1,0 +1,284 @@
+{
+	"info": {
+		"_postman_id": "51ac7832-76f2-4aa7-ab5f-88d944d8f210",
+		"name": "eyeTunes",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Customer",
+			"item": [
+				{
+					"name": "Get Customer by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://eyetunes.herokuapp.com/api/customers/id/:customerId",
+							"protocol": "https",
+							"host": [
+								"eyetunes",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"customers",
+								"id",
+								":customerId"
+							],
+							"variable": [
+								{
+									"key": "customerId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Customer by Name",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://eyetunes.herokuapp.com/api/customers/name/:name",
+							"protocol": "https",
+							"host": [
+								"eyetunes",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"customers",
+								"name",
+								":name"
+							],
+							"variable": [
+								{
+									"key": "name",
+									"value": "Lu"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Customers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://eyetunes.herokuapp.com/api/customers/all",
+							"protocol": "https",
+							"host": [
+								"eyetunes",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"customers",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Customers with Limit and Offset",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://eyetunes.herokuapp.com/api/customers/?limit=10&offset=50",
+							"protocol": "https",
+							"host": [
+								"eyetunes",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"customers",
+								""
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "offset",
+									"value": "50"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Customer",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Luís2\",\r\n    \"id\": 1\r\n}"
+						},
+						"url": {
+							"raw": "https://eyetunes.herokuapp.com/api/customers/update/",
+							"protocol": "https",
+							"host": [
+								"eyetunes",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"customers",
+								"update",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Customer",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Spongebob\",\r\n    \"lastName\": \"Squarepants\",\r\n    \"country\": \"Pacific Ocean\",\r\n    \"postalCode\": \"Bikini Bottom\",\r\n    \"phoneNumber\": \"555-5555\",\r\n    \"email\": \"squidwardsbestfriend@crustycrab.com\"\r\n}"
+						},
+						"url": {
+							"raw": "https://eyetunes.herokuapp.com/api/customers/",
+							"protocol": "https",
+							"host": [
+								"eyetunes",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"customers",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Customer Country",
+			"item": [
+				{
+					"name": "Get Customer Count by Country",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://eyetunes.herokuapp.com/api/statistics/countries/customers/count",
+							"protocol": "https",
+							"host": [
+								"eyetunes",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"statistics",
+								"countries",
+								"customers",
+								"count"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Customer Genre",
+			"item": [
+				{
+					"name": "Get Top Customer Genre",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://eyetunes.herokuapp.com/api/customers/:customerId/popular/genre/",
+							"protocol": "https",
+							"host": [
+								"eyetunes",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"customers",
+								":customerId",
+								"popular",
+								"genre",
+								""
+							],
+							"variable": [
+								{
+									"key": "customerId",
+									"value": "56"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Customer Spender",
+			"item": [
+				{
+					"name": "Get Total Spending by Customer",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://eyetunes.herokuapp.com/api/statistics/customers/top-spenders",
+							"protocol": "https",
+							"host": [
+								"eyetunes",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"statistics",
+								"customers",
+								"top-spenders"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
